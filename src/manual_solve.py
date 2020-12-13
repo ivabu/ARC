@@ -1,5 +1,11 @@
 #!/usr/bin/python
 
+
+#Student name: Iva Bubalo
+#Email: i.bubalo1@nuigalway.ie
+#Student ID: 20235871
+#GitHub: https://github.com/ivabu/ARC/upload/master/src
+
 import os, sys
 import json
 import numpy as np
@@ -10,14 +16,96 @@ import re
 ### result. Name them according to the task ID as in the three
 ### examples below. Delete the three examples. The tasks you choose
 ### must be in the data/training directory, not data/evaluation.
-def solve_6a1e5592(x):
-    return x
 
-def solve_b2862040(x):
-    return x
 
-def solve_05269061(x):
-    return x
+
+################################
+
+#####Task 1: 6f8cd79b.json
+
+#Required Transformation: Find the fist and last list in data, update the color of each element.
+#Find first and last element in each list, update the color of the elements.
+
+def solve_6f8cd79b(data):
+    color = 8
+    for i in range(0,len(data)): #update color for the first and last row
+        if i == 0 or i == len(data)-1:
+            for j in range(0,len(data[i])):
+                data[i][j] = color
+    for line in data: #update color for the fist and last element in each list
+        line[0] = color
+        line[-1] = color
+    return data
+
+
+#####Task 2: 3bd67248.json
+
+#Required Transformation:
+#Update the elements color of the last list.
+#Start the iteration in the reversed order subtracting the iterator from the row length.
+
+def solve_3bd67248(data):
+    botttom_colour = 4
+    diagonal_colour = 2
+    # Bottom line colouring
+    for i in range(0,len(data)):
+        if i == len(data)-1:
+            for j in range(1,len(data[i])):
+                data[i][j] = bottom_colour
+
+    # Diagonal line colouring
+    i = len(data) - 1
+    while i >= 0: #reversed iteration
+        # If square not black, first list - 1 square at
+        j = len(data[i]) - 1 #find current row length
+        col = j - i #find current column, row lenght minus iterator
+        if data[i][col] == 0: # black colour check
+            data[i][col] = diagonal_colour 
+        i = i - 1
+
+    return data
+
+
+
+
+#####Task 3: a2fd1cf0.json
+
+#Required Transformation: Assign colours and find color coordinates. From red square we always draw horizontally,
+#and from green square we always draw vertically until we meet the y coordinate of the red square.
+
+def solve_a2fd1cf0(data):
+    red = 2
+    green = 3
+    colour = 8
+    red_coords = find_color_index(data, red)
+    green_coords = find_color_index(data, green)
+
+    if(red_coords[1] > green_coords[1]):
+        # draw line to the left
+        for i in range(green_coords[1], red_coords[1]):
+            data[red_coords[0]][i] = colour
+    else:
+        for i in range(red_coords[1], green_coords[1]):
+            data[red_coords[0]][i+1] = colour
+        # draw in right direction
+    if(red_coords[0] > green_coords[0]):
+        for i in range(green_coords[0] + 1, red_coords[0]):
+            data[i][green_coords[1]] = colour
+        # draw upwards
+    else:
+        for i in range(red_coords[0], green_coords[0]):
+            data[i][green_coords[1]] = colour
+        # draw downwards
+
+    return data
+
+def find_color_index(data, colour):
+    for i in range(0, len(data)):
+        for j in range(0, len(data[i])):
+            if data[i][j] == colour:
+                return i, j
+            
+############################
 
 
 def main():
