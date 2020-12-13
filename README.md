@@ -1,3 +1,8 @@
+# The following was my assignment for Programming and Tools for Artificial Intelligence module at NUIG (19 Dec 2020):
+
+The task was to hand-code 3 solutions to training json examples. My criteria for choosing 3 tasks was the simplicity of solution.  
+
+
 # The Abstraction and Reasoning Corpus (ARC)
 
 This repository contains the ARC task data, as well as a browser-based interface for humans to try their hand at solving the tasks manually.
